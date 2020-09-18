@@ -1,3 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Shrikhand&display=swap" rel="stylesheet");
+@import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet");
+
+/*Remove default Styles */
+
+input {
+  appearance: none;
+  background-color: white;
+  border-width: 0px;
+  font-family: 'Catamaran', sans-serif;
+  font-weight: 500;
+}
+
+input:focus {
+  appearance: none;
+  border-width: 0px;
+  outline: none;
+}
+
+a:link{
+  text-decoration: none!important;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,7 +28,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: rgba(20, 119, 82, 1);
+  background: rgba(244, 243, 244, 1);
 }
 
 code {
@@ -13,18 +36,37 @@ code {
     monospace;
 }
 
+
 h1 {
 	color: white;
 }
 
-.card2 {
-  text-align: center;
+.headline {
+  font-family: 'Shrikhand', cursive;
+  letter-spacing: 3px;
+  font-size: 40px;
+  margin-top: 12px;
+}
+
+.headline2 {
+  font-family: 'Rubik', sans-serif;
+  margin-top: 6px;
+}
+
+.headline2:visited {
+  color: white;
+}
+
+
+
+.recipe-card {
+   text-align: center;
   background-color: #9EEBCF;
   display: inline-block;
   vertical-align: top;
   border-radius: .6rem;
-  padding: var(--spacing-medium);
-  margin: var(--spacing-small);
+  padding: 1rem;
+  margin: .5rem;
 
   -moz-osx-font-smoothing: grayscale;
   backface-visibility: hidden;
@@ -33,20 +75,57 @@ h1 {
 
   border-width: .25rem;
   box-shadow: 4px 4px 8px 0px rgba( 0, 0, 0, 0.2 );
-  max-width: 25em;
-  max-height: 250px;
+  max-width: 20em;
+  height: 570px;
+}
 
+.recipe-card-clicked {
+  text-align: center;
+  background-color: #9EEBCF;
+  display: inline-block;
+  vertical-align: top;
+  border-radius: .6rem;
+  padding: 1rem;
+  margin: .5rem;
+
+  -moz-osx-font-smoothing: grayscale;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  transition: transform 0.25s ease-out;
+
+  border-width: .25rem;
+  box-shadow: 4px 4px 8px 0px rgba( 0, 0, 0, 0.2 );
+  max-width: 20em;
+}
+
+.ingredients-method {
+  background-color: #a1cebf;
+  border-radius: .6rem;
+  padding: 1rem .5rem;
 
 }
 
 .header {
+  display: flex;
+  justify-content: center;
+  align-content: center;
   padding: 10px 16px;
-  background: #555;
+  background: #0d605f;
   color: #f1f1f1;
+  min-width: 520px;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .sticky {
   position: fixed;
   top: 0;
   width: 100%
+}
+
+.highlight:hover {
+  cursor: pointer;
+  color: #3d3f3e;
 }

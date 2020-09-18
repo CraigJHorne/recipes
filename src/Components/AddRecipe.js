@@ -10,7 +10,7 @@ class AddRecipe extends React.Component {
  constructor(props){
    super(props);
    this.state = { 
-   				recipes: recipes,
+   				recipes2: recipes,
    				newRecipe: { id: '', name: '', blurb: '', imageOne: "/images/recipe0.jpg"},
    				};
  

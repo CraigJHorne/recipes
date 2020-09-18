@@ -1,66 +1,63 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import ReactDOM from 'react-dom';
+import { connect } from 'react-redux';
 import CardList from '../Components/CardList';
-import { recipes } from '../Components/recipes';
 import SearchBox from '../Components/SearchBox';
-import Scroll from '../Components/Scroll';
 import AddRecipe from '../Components/AddRecipe';
 import '../Containers/App.css';
 import { Link } from 'react-router-dom';
+import { setSearchField, requestRecipes } from '../actions.js';
 
-
-
-
-class App extends Component {
-	constructor() {
-		super()
-		this.state = {
-			recipes: recipes,
-			searchfield: ""
-		}
+const mapStateToProps = state => {
+	return {
+		searchField: state.searchRecipes.searchField,
+		recipes: state.requestRecipes.recipes,
+		isPending: state.requestRecipes.isPending,
+		error: state.requestRecipes.error
 	}
+}
 
-	componentDidMount() {
-		fetch({ recipes })
-		.then(response => response.json())
-		.then(users => this.setState({ recipes: users }));
+const mapDispatchToProps = (dispatch)  => {
+	return {
+		onSearchChange: (event) => dispatch(setSearchField(event.target.value)),
+		onRequestRecipes: () => requestRecipes(dispatch)
+	}
 }
 
 
+class App extends Component {
 
+	componentDidMount() {
+		this.props.onRequestRecipes();
+}
 
-	onSearchChange = (event) => {
-		this.setState({searchfield: event.target.value })
-	}
 
 	render() {
-		const filteredRecipes = this.state.recipes.filter(recipe => {
-			return recipe.name.toLowerCase().includes(this.state.searchfield.toLowerCase());
+		const { recipes, searchField, onSearchChange, isPending } = this.props;
+		const filteredRecipes = recipes.filter(recipe => {
+			return recipe.name.toLowerCase().includes(searchField.toLowerCase());
 		})
-	return (
+	return isPending  ?
+		<h1>Loading</h1> :
+		(
 		<Router>
 		<Switch>
         <Route exact path="/">
-		<div className="tc bg-dark-green mv2 flex justify-center mh1">
-			<SearchBox className="mh4" searchChange={this.onSearchChange}/>
-			<h1 className="mh4">Recipes</h1>
-			<Link className="mh4" to={"/addrecipe"}><h2>Add Recipe</h2></Link>
+		<div className="header">
+			<SearchBox className="mh4" searchChange={onSearchChange}/>
+			<h1 className="mh4 headline">Recipes</h1>
+			<Link className="headline2" to={"/addrecipe"}><h4>+ Add Recipe</h4></Link>
 		</div>
 		<div className="tc bg-near-white mv2">
-		<Scroll>
 		<CardList recipes={filteredRecipes} />
-		</Scroll>
 		</div>
 		</Route>
         <Route path="/addrecipe">
-        <div className="tc">
-		<h1>Add Recipe</h1>
-		<Link to={"/"}><h2>Home</h2></Link>
-		<Scroll>
-		<AddRecipe />
-		</Scroll>
+        <div className="header">
+		<h1 className="mh4 headline">Add Recipe</h1>
+		<Link className="headline2" to={"/"}><h4>Home</h4></Link>
 		</div>
+		<AddRecipe />
 		</Route>
 		</Switch>
 		</Router>
@@ -68,4 +65,4 @@ class App extends Component {
 	}
 }
 
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);
