@@ -1,7 +1,7 @@
 import { CHANGE_SEARCH_FIELD,
 		REQUEST_RECIPES_PENDING,
 		REQUEST_RECIPES_SUCCESS,
-		REQUEST_RECIPES_FAILED } from './constants.js';
+		REQUEST_RECIPES_FAILED, } from './constants.js';
 
 const initialStateSearch = {
 	searchField: ''
@@ -20,12 +20,14 @@ export const searchRecipes = (state=initialStateSearch, action={}) => {
 const initialStateRecipes = {
 	isPending: false,
 	recipes: [],
-	error: ''
+	error: '',
+	newRecipe: ["hello"]
 }
 
 export const requestRecipes = (state=initialStateRecipes, action={}) => {
 	switch(action.type) {
 		case REQUEST_RECIPES_PENDING:
+		console.log(...state.recipes);
 			return Object.assign({}, state, { isPending: true})
 		case REQUEST_RECIPES_SUCCESS:
 			return Object.assign({}, state, { recipes: action.payload, isPending: false })
@@ -35,3 +37,5 @@ export const requestRecipes = (state=initialStateRecipes, action={}) => {
 			return state;
 	}
 }
+
+

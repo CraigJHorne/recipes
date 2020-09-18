@@ -20,7 +20,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch)  => {
 	return {
 		onSearchChange: (event) => dispatch(setSearchField(event.target.value)),
-		onRequestRecipes: () => requestRecipes(dispatch)
+		onRequestRecipes: () => requestRecipes(dispatch),
 	}
 }
 
@@ -46,7 +46,7 @@ class App extends Component {
 		<div className="header">
 			<SearchBox className="mh4" searchChange={onSearchChange}/>
 			<h1 className="mh4 headline">Recipes</h1>
-			<Link className="headline2" to={"/addrecipe"}><h4>+ Add Recipe</h4></Link>
+			{/* <Link className="headline2" to={"/addrecipe"}><h4>+ Add Recipe</h4></Link> */}
 		</div>
 		<div className="tc bg-near-white mv2">
 		<CardList recipes={filteredRecipes} />
@@ -54,10 +54,10 @@ class App extends Component {
 		</Route>
         <Route path="/addrecipe">
         <div className="header">
-		<h1 className="mh4 headline">Add Recipe</h1>
+		{/* <h1 className="mh4 headline">Add Recipe</h1> */}
 		<Link className="headline2" to={"/"}><h4>Home</h4></Link>
 		</div>
-		<AddRecipe />
+		<AddRecipe className="mh4"/>
 		</Route>
 		</Switch>
 		</Router>
